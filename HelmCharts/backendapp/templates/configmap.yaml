@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configmap.name }}
+data:
+  SPRING_DATASOURCE_USERNAME: {{ .Values.configmap.username }} 
+  SPRING_PROFILES_ACTIVE: {{ .Values.configmap.profile }}
+  SPRING_DATASOURCE_URL: {{ .Values.configmap.proxyurl }} 
