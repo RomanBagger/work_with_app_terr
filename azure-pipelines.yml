@@ -36,5 +36,5 @@ steps:
 
 - script: |
     terraform apply -input=false -auto-approve
-  workingDirectory: $(Working_Directory)
+  workingDirectory: '$(Working_Directory)/front'
   displayName: 'Deploy second application'
