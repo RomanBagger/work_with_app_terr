@@ -15,7 +15,7 @@ variables:
 steps: 
 
 - script: |
-    sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+    sudo gcloud components install gke-gcloud-auth-plugin
   displayName: 'Install kubectl'
 
 - script: |
