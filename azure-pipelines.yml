@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  name: 'Default'
+  demands:
+    - agent.name -equals instance-20241203-145320
+
+variables:
+  GCP_SERVICE_CONNECTION: 'mygcpconnection'
+  Working_Directory: '$(System.DefaultWorkingDirectory)/HelmCharts'
+
+steps: 
+
+- script: |
+    gcloud container clusters get-credentials $(CLUSTER_NAME) --region $(REGION) --project $(PROJECT)
+  workingDirectory: $(Working_Directory)
+  displayName: 'Connection to GKE'
+
+- script: |
+    terraform init -input=false
+  workingDirectory: '$(Working_Directory)/back'
+  displayName: 'Terraform Init for app1'
+
+- script: |
+    terraform apply -input=false -auto-approve 
+  workingDirectory: '$(Working_Directory)/back'
+  displayName: 'Deploy first application'
+
+- script: |
+    terraform init -input=false
+  workingDirectory: '$(Working_Directory)/front'
+  displayName: 'Terraform Init for app2'
+
+- script: |
+    terraform apply -input=false -auto-approve
+  workingDirectory: $(Working_Directory)
+  displayName: 'Deploy second application'
