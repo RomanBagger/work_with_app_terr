@@ -1,5 +1,0 @@
-container:
-  image: romanbeggar/frontend:1.4
-
-replicaCount: 1
-
