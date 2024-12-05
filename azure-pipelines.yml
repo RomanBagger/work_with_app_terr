@@ -15,10 +15,6 @@ variables:
 steps: 
 
 - script: |
-    sudo gcloud components install gke-gcloud-auth-plugin
-  displayName: 'Install kubectl'
-
-- script: |
     gcloud container clusters get-credentials $(CLUSTER_NAME) --region $(REGION) --project $(PROJECT)
   workingDirectory: $(Working_Directory)
   displayName: 'Connection to GKE'
